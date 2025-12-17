@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Em breve, nós </title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  html, body{height:100%;overflow:hidden;}
+  body{
+    background: linear-gradient(-45deg,#ff758c,#ff7eb3,#fbd786,#f7797d);
+    background-size:400% 400%;
+    animation: gradientBG 20s ease infinite;
+    display:flex;justify-content:center;align-items:center;color:white;text-align:center;padding:20px;
+  }
+  @keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  .container{
+    max-width:700px;
+    background: rgba(0,0,0,0.25);
+    padding:50px;
+    border-radius:25px;
+    backdrop-filter: blur(12px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    position:relative;
+  }
+  h1{font-size:3rem;margin-bottom:20px;color:#ffe0e9;}
+  p{font-size:1.2rem;margin-bottom:30px;color:#ffd6e0;}
+
+  .countdown{display:flex;justify-content:space-around;margin:30px 0;}
+  .countdown div{text-align:center;}
+  .countdown span{display:block;font-size:2.2rem;font-weight:bold;}
+
+  input[type=email]{
+    padding:15px 20px;border-radius:30px 0 0 30px;border:none;outline:none;width:65%;font-size:1rem;
+  }
+  button{
+    padding:15px 25px;border:none;border-radius:0 30px 30px 0;background:#ff496e;color:white;font-size:1rem;font-weight:bold;cursor:pointer;transition:0.3s;
+  }
+  button:hover{background:#ff2e55;}
+
+  footer{margin-top:25px;font-size:0.9rem;color:rgba(255,255,255,0.7);}
+
+  /* Heart Particles */
+  .heart{
+    position:absolute;
+    width:20px;height:20px;
+    background:red;
+    transform:rotate(45deg);
+    animation: floatUp linear infinite;
+    opacity:0.7;
+  }
+  .heart:before, .heart:after{
+    content:'';
+    position:absolute;
+    width:20px;height:20px;
+    background:red;
+    border-radius:50%;
+  }
+  .heart:before{top:-10px;left:0;}
+  .heart:after{left:10px;top:0;}
+  @keyframes floatUp{
+    0%{transform:translateY(0) rotate(45deg); opacity:0.7;}
+    100%{transform:translateY(-700px) rotate(45deg); opacity:0;}
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sem charme garantido, mas com verdade </h1>
+  
+
+    <div class="countdown">
+      <div><span id="days">00</span>Days</div>
+      <div><span id="hours">00</span>Hours</div>
+      <div><span id="minutes">00</span>Minutes</div>
+      <div><span id="seconds">00</span>Seconds</div>
+    </div>
+
+    <div class="subscribe">
+      <form id="subscribeForm">
+        
+     
+      </form>
+    </div>
+
+   
+  </div>
+
+<script>
+  const countdownDate = new Date("Jan 10, 2026 19:30:00").getTime();
+  const daysEl=document.getElementById('days');
+  const hoursEl=document.getElementById('hours');
+  const minutesEl=document.getElementById('minutes');
+  const secondsEl=document.getElementById('seconds');
+
+  function updateCountdown(){
+    const now=new Date().getTime();
+    const diff=countdownDate-now;
+    const d=Math.floor(diff/(1000*60*60*24));
+    const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const m=Math.floor((diff%(1000*60*60))/(1000*60));
+    const s=Math.floor((diff%(1000*60))/1000);
+    daysEl.innerText=d<10?'0'+d:d;
+    hoursEl.innerText=h<10?'0'+h:h;
+    minutesEl.innerText=m<10?'0'+m:m;
+    secondsEl.innerText=s<10?'0'+s:s;
+  }
+  setInterval(updateCountdown,1000);
+
+  const form=document.getElementById('subscribeForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    alert('Thank you! You will be notified.');
+    form.reset();
+  });
+
+  // Create heart particles
+  for(let i=0;i<40;i++){
+    const heart=document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left=Math.random()*100+'%';
+    heart.style.animationDuration=3+Math.random()*5+'s';
+    heart.style.width=10+Math.random()*20+'px';
+    heart.style.height=10+Math.random()*20+'px';
+    document.body.appendChild(heart);
+  }
+</script>
+</body>
+</html>
